@@ -1,20 +1,24 @@
 <template>
   <div class="chat-box">
-    <div v-for="(message, index) in chatStore.messages" :key="index" class="message-container">
-      <MessageInput :message="message" />
+    <div class="messages-container" ref="messagesContainer">
+      <div v-for="(message, index) in chatStore.messages" :key="index" class="message-container">
+        <MessageInput :message="message" />
+      </div>
     </div>
+
     <div class="input-container">
       <input
         v-model="chatStore.userMessage"
-        @keyup.enter="chatStore.sendMessage"
+        @keyup.enter="sendMessageAndScroll"
         placeholder="Digite sua mensagem..."
       />
-      <button @click="chatStore.sendMessage">Enviar</button>
+      <button @click="sendMessageAndScroll">Enviar</button>
     </div>
   </div>
 </template>
 
 <script>
+import { onMounted, ref, watch, nextTick } from 'vue';
 import { useChatStore } from '../stores/chatStore';
 import MessageInput from './MessageInput.vue';
 
@@ -24,12 +28,35 @@ export default {
   },
   setup() {
     const chatStore = useChatStore();
+    const messagesContainer = ref(null);
 
-    // Inicializa o chat com a primeira mensagem do bot
-    chatStore.initializeChat();
+    const scrollToBottom = () => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+      }
+    };
+
+    watch(
+  () => chatStore.messages.length,
+  async () => {
+    await nextTick(); // aguarda a renderização da nova mensagem
+    scrollToBottom();
+  }
+);
+
+    const sendMessageAndScroll = () => {
+      chatStore.sendMessage(); // scroll será chamado automaticamente via watch
+    };
+
+    onMounted(() => {
+      chatStore.initializeChat();
+      scrollToBottom();
+    });
 
     return {
       chatStore,
+      messagesContainer,
+      sendMessageAndScroll,
     };
   },
 };
@@ -39,11 +66,20 @@ export default {
 
   
   <style scoped>
-  .chat-box {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-  }
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 500px; /* ou o valor que quiser */
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-bottom: 10px;
+}
+
   
   .input-container {
     display: flex;

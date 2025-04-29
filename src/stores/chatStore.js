@@ -41,7 +41,6 @@ export const useChatStore = defineStore('chatStore', {
           const data = {
             reply : 'hello world'
           }
-          // Adiciona a resposta da API (bot) ao array de mensagens
           this.messages.push({
             type: 'bot',
             text: data.reply || 'Desculpe, não entendi.',

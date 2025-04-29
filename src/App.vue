@@ -36,10 +36,9 @@
 </header>
 
 
-  <!-- CONTENT -->
-    <div class="container mb-5">
+<main class="d-flex justify-content-center align-items-center text-center">
     <router-view></router-view>
-  </div>
+  </main>
 
 </template>
 
@@ -74,6 +73,10 @@ nav.navbar {
   height: 70px; /* ou um valor adequado ao tamanho do seu logo */
   position: relative; /* mantém a posição relativa para o logo absoluto */
 }
-
-
+main{
+  margin-top: 70px;
+}
+.container {
+  height: 100%;
+}
 </style>
