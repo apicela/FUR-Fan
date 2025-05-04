@@ -1,0 +1,42 @@
+:root {
+  --primary-color: black;
+  --secondary-color: rgba(255,126,184,1) 86%;
+  --grey-color: rgb(224, 224, 224);
+}
+
+.bg-main-color {
+  background: var(--primary-color);
+}
+
+.bg-header {
+  background: var(--grey-color);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 0.7vh; /* Largura da barra */
+  height: 1vh;
+}
+
+/* Estilizando a parte rolável */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color); /* Cor da parte rolável */
+  border-radius: 10px; /* Borda arredondada */
+}
+
+/* Estilizando a área ao redor da parte rolável */
+::-webkit-scrollbar-track {
+  background: #d4d4d4; /* Cor do fundo */
+  border-radius: 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Mantém o header acima de outros elementos */
+}
+
