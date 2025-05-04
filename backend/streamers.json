@@ -1,0 +1,53 @@
+{
+    "streamers": [
+      {
+        "name": "Brino",
+        "twitch": "https://www.twitch.tv/brino"
+      },
+      {
+        "name": "Cris Guedes",
+        "twitch": "https://www.twitch.tv/crisguedes"
+      },
+      {
+        "name": "Ivd Maluco",
+        "twitch": "https://www.twitch.tv/ivdmaluco"
+      },
+      {
+        "name": "Manel",
+        "twitch": "https://www.twitch.tv/omanelzin_"
+      },
+      {
+        "name": "Murillo",
+        "twitch": "https://www.twitch.tv/murillomellobr"
+      },
+      {
+        "name": "Noobzim",
+        "twitch": "https://www.twitch.tv/noooobzim"
+      },
+      {
+        "name": "Paula Nobre",
+        "twitch": "https://www.twitch.tv/paulanobre"
+      },
+      {
+        "name": "Pokiz",
+        "twitch": "https://www.twitch.tv/pOkizGames"
+      },
+      {
+        "name": "Rafinha",
+        "twitch": "https://www.twitch.tv/raf1nhafps"
+      },
+      {
+        "name": "Sofia Espanha",
+        "twitch": "https://www.twitch.tv/sofiaespanha/"
+      },
+      {
+        "name": "Thiago sem T",
+        "twitch": "https://www.twitch.tv/thiagosemtlives",
+        "youtube": "https://www.youtube.com/@thiagosemt"
+      },
+      {
+        "name": "Xarola",
+        "twitch": "https://www.twitch.tv/xarola_"
+      }
+    ]
+}
