@@ -5,7 +5,7 @@
     </div> 
     
     <div class="message" :class="{ 'bot-message': message.type === 'bot', 'user-message': message.type === 'user' }">
-      <p>{{ message.text }}</p>
+      <p class="message-text">{{ message.text }}</p>
     </div>
 
     <div v-if="message.type === 'user'" class="user-avatar">
@@ -33,9 +33,14 @@ export default {
     display: flex;
     align-items: flex-start; /* Alinha avatar e mensagem verticalmente */
     margin-bottom: 10px;
-    background: red;
   }
   
+  .message-text {
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+
   .avatar {
     width: 40px;
     height: 40px;

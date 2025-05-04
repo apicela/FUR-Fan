@@ -1,0 +1,5 @@
+backend/venv
+**/__pycache__/
+.vscode
+backend/matches_cache.json
+backend/players_cache.json

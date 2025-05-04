@@ -1,24 +1,26 @@
 import { defineStore } from 'pinia';
+import { useBotService } from '../services/BotService';
 
 export const useChatStore = defineStore('chatStore', {
   state: () => ({
     messages: [],
     userMessage: '',
+    chatState: 1
   }),
   actions: {
     initializeChat() {
+      const botService = useBotService();
+      
       // Adiciona a primeira mensagem do bot se a lista de mensagens estiver vazia
       if (this.messages.length === 0) {
-        this.messages.push({
-          type: 'bot',
-          text: 'Olá, FURIA! Como posso te ajudar hoje?',
-        });
+        this.messages = botService.getWelcomeMessages();
       }
     },
 
     async sendMessage() {
       if (this.userMessage.trim() !== '') {
         const input = this.userMessage;
+        const botService = useBotService();
 
         // Adiciona a mensagem do usuário
         this.messages.push({ type: 'user', text: input });
@@ -27,29 +29,27 @@ export const useChatStore = defineStore('chatStore', {
         this.userMessage = '';
 
         try {
-          // const response = await fetch('https://sua-api-aqui.com/endpoint', {
-          //   method: 'POST',
-          //   headers: { 'Content-Type': 'application/json' },
-          //   body: JSON.stringify({ message: input }), // Corpo da requisição
-          // });
-
-          // if (!response.ok) {
-          //   throw new Error(`Erro: ${response.status}`);
-          // }
-
-          // const data = await response.json();
-          const data = {
-            reply : 'hello world'
-          }
+          // Processa a mensagem localmente usando o botService
+          const response = botService.processMessage(input);
+          
           this.messages.push({
             type: 'bot',
-            text: data.reply || 'Desculpe, não entendi.',
+            text: response.reply,
           });
 
-        } catch (error) {
-          console.error('Erro ao chamar a API:', error);
+          // Adiciona follow-up se existir
+          if (response.followUp) {
+            setTimeout(() => {
+              this.messages.push({
+                type: 'bot',
+                text: response.followUp,
+              });
+            }, 1000);
+          }
 
-          // Mensagem padrão do bot em caso de falha
+        } catch (error) {
+          console.error('Erro ao processar mensagem:', error);
+
           this.messages.push({
             type: 'bot',
             text: 'Desculpe, não consegui entender sua mensagem. Tente novamente mais tarde.',
