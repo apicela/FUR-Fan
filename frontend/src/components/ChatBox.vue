@@ -70,7 +70,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 500px; /* ou o valor que quiser */
+  max-height: 600px; 
 }
 
 .messages-container {

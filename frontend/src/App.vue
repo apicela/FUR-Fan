@@ -26,7 +26,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav ms-5">
             <RouterLink class="nav-link rounded-4" to="/">Início</RouterLink>
-            <RouterLink class="nav-link rounded-4" to="/lojas">XXX</RouterLink>
           </div>
         </div>
 
@@ -74,7 +73,7 @@ nav.navbar {
   position: relative; /* mantém a posição relativa para o logo absoluto */
 }
 main{
-  margin-top: 70px;
+  margin-top: 120px;
 }
 .container {
   height: 100%;

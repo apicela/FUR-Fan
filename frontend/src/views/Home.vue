@@ -32,7 +32,7 @@
   main {
     margin-top: 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
   }
   </style>
   

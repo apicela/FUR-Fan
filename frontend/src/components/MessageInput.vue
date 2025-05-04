@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="message.type === 'user'" class="user-avatar">
-      <img src="../assets/furia-logo.png" alt="FURIA Logo" class="avatar"/>
+      <img src="../../public/user.png" alt="FURIA Logo" class="avatar"/>
     </div>
   </div> 
 </template>

@@ -10,8 +10,6 @@ export const useChatStore = defineStore('chatStore', {
   actions: {
     initializeChat() {
       const botService = useBotService();
-      
-      // Adiciona a primeira mensagem do bot se a lista de mensagens estiver vazia
       if (this.messages.length === 0) {
         this.messages = botService.getWelcomeMessages();
       }
@@ -21,17 +19,15 @@ export const useChatStore = defineStore('chatStore', {
       if (this.userMessage.trim() !== '') {
         const input = this.userMessage;
         const botService = useBotService();
-
-        // Adiciona a mensagem do usuário
+        
         this.messages.push({ type: 'user', text: input });
 
-        // Limpa o campo de entrada
         this.userMessage = '';
 
         try {
           // Processa a mensagem localmente usando o botService
-          const response = botService.processMessage(input);
-          
+          const response = await botService.processMessage(input);
+
           this.messages.push({
             type: 'bot',
             text: response.reply,
@@ -47,6 +43,9 @@ export const useChatStore = defineStore('chatStore', {
             }, 1000);
           }
 
+          if(input === '7') {
+            this.chatState = 7;
+          }
         } catch (error) {
           console.error('Erro ao processar mensagem:', error);
 
