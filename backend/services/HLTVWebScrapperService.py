@@ -22,10 +22,19 @@ class HLTVWebScrapperService:
     @staticmethod
     def _setup_selenium():
         options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
+        options.add_argument("--headless")  # Executa em background
+        options.add_argument("--no-sandbox")  # Necessário no Docker
+        options.add_argument("--disable-dev-shm-usage")  # Evita erro de memória compartilhada
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-software-rasterizer")
         options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("user-agent=Mozilla/5.0 ...")
+
+        # Se estiver usando o chromium instalado via apt
+        options.binary_location = "/usr/bin/chromium"
+
+        driver = webdriver.Chrome(service=Service(), options=options)
         return driver
 
     def _get_players_data(self):
